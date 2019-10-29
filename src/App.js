@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import LayoutDataPengguna from './app/LayoutDataPengguna'
 import LoginPage from './app/LayoutLogin'
+import DashboardUser from './app/LayoutDashboard'
 import { createStore } from 'redux'
 import {
   BrowserRouter as Router,
@@ -31,6 +32,9 @@ class App extends React.Component {
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/dashboard">
+                <DashboardUser />
+              </Route>
               <Route path="/users">
                 <LayoutDataPengguna/>
               </Route>

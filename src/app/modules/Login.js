@@ -1,11 +1,14 @@
+import { Redirect } from 'react-router-dom'
 const React = require('react')
 const axios = require('axios')
 const qs = require('querystring')
+
 
 class Login extends React.Component {
     state = {
         user: '',
         password: '',
+        logged: false,
     };
 
     handleChange = (e) => {
@@ -27,11 +30,15 @@ class Login extends React.Component {
         event.preventDefault();
         axios.post(process.env.REACT_APP_API_URL+'login/', qs.stringify(requestBody) ,config)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
+            localStorage.setItem("token", res.data.data.token)
+        }).then(() => this.setState(() => ({
+            logged: true
+          })))
     }
     render() {
+        if (this.state.logged) {
+            return <Redirect to="/dashboard" />
+        }
         return(
             <form onSubmit={this.handleSubmit}>
                 <label>
