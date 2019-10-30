@@ -26,7 +26,7 @@ class Login extends React.Component {
             user: this.state.user,
             password: this.state.password,
         }
-        console.log(qs.stringify(requestBody))
+
         event.preventDefault();
         axios.post(process.env.REACT_APP_API_URL+'login/', qs.stringify(requestBody) ,config)
         .then(res => {
@@ -38,6 +38,10 @@ class Login extends React.Component {
     render() {
         if (this.state.logged) {
             return <Redirect to="/dashboard" />
+        }
+        if (localStorage.getItem("token") !== ""){
+            return <Redirect to="/dashboard" />
+            // console.log("token e isi cuk : "+ localStorage.getItem("token"))
         }
         return(
             <form onSubmit={this.handleSubmit}>
