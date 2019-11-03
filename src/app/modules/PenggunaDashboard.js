@@ -5,7 +5,8 @@ const axios = require('axios')
 class PenggunaDashboard extends React.Component{
     state = {
         items: [],
-        redirect: false
+        redirect: false,
+        admin: 0
     }
 
     componentWillMount() {
@@ -19,6 +20,7 @@ class PenggunaDashboard extends React.Component{
             return this.setState({
                 status: data.status,
                 items: data.data,
+                admin: data.data.is_admin
             })
         }).catch((err) => {
             this.setState({
@@ -30,40 +32,41 @@ class PenggunaDashboard extends React.Component{
     render () {    
         const data = this.state.items.map((item, key)=>
             <table>
-                <tr colSpan="2">
-                    <td><b><center>Selamat Datang {item.nama}</center></b></td>
-                </tr>
-                <tr colSpan="2">
-                    <td><center>Berikut akses ownclud anda</center></td>
-                </tr>
-                <tr>
-                    <td><b>Username</b></td>
-                    <td>:</td>
-                    <td>{item.username}</td>
-                </tr>
-                <tr>
-                    <td><b>Password : </b></td>
-                    <td>:</td>
-                    <td>{item.password}</td>
-                </tr>
-                <tr>
-                    <td><b>OwncloudUrl : </b></td>
-                    <td>:</td>
-                    <td>{item.oc_url}</td>
-                </tr>
+                <tbody>
+                    <tr colSpan="2">
+                        <td><b><center>Selamat Datang {item.nama}</center></b></td>
+                    </tr>
+                    <tr colSpan="2">
+                        <td><center>Berikut akses ownclud anda</center></td>
+                    </tr>
+                    <tr>
+                        <td><b>Username</b></td>
+                        <td>:</td>
+                        <td>{item.username}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Password : </b></td>
+                        <td>:</td>
+                        <td>{item.password}</td>
+                    </tr>
+                    <tr>
+                        <td><b>OwncloudUrl : </b></td>
+                        <td>:</td>
+                        <td>{item.oc_url}</td>
+                    </tr>
+                </tbody>
             </table>
         );
         if (this.state.redirect){
             localStorage.setItem("token","")
             return <Redirect to="/" />
         }
+        if (this.state.admin === 1) {
+            return <Redirect to="/admin" />
+        }
         return (
             <center>
-                <table>
-                    <tbody>
-                        {data}
-                    </tbody>
-                </table>
+                {data}
             </center>
         )
     }

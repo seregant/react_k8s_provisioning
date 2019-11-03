@@ -14,8 +14,7 @@ class DataPengguna extends React.Component {
         .then((result)=> result.data)
         .then((data)=> {
             return this.setState({
-                items: data.data,
-                isLoaded: false
+                items: data.data
             })
         })
     }
