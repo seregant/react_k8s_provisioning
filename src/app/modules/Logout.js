@@ -1,3 +1,5 @@
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import {Button} from "react-bulma-components"
 import { Redirect } from 'react-router-dom'
 import React from 'react'
 
@@ -15,8 +17,8 @@ class Logout extends React.Component {
         if (this.state.logout) {
             return <Redirect to="/"/>
         } 
-        return(
-            <button type="button" onClick={this.logoutHandler}>Logout</button>
+        return (
+            <Button color="danger" size="normal" onClick={this.logoutHandler}>Logout</Button>
         )
     }
 }

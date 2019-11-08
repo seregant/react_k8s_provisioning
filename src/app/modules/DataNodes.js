@@ -33,7 +33,7 @@ class DataNodes extends React.Component {
             return <Redirect to="/" />
         }
         return(
-            <table>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Nama Node</th>

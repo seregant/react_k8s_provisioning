@@ -7,8 +7,7 @@ import Register from './app/LayoutRegister'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import DashboardAdmin from './app/LayoutDashboardAdmin';
 
@@ -18,20 +17,6 @@ class App extends React.Component {
       <div>
         <Router>
           <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/users">Users</Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-              </ul>
-            </nav>
-
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>

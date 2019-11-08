@@ -1,4 +1,6 @@
 import { Redirect } from 'react-router-dom'
+import LogoutButton from './Logout'
+
 const React = require('react')
 const axios = require('axios')
 
@@ -6,7 +8,7 @@ class PenggunaDashboard extends React.Component{
     state = {
         items: [],
         redirect: false,
-        admin: 0
+        admin: false
     }
 
     componentWillMount() {
@@ -20,7 +22,7 @@ class PenggunaDashboard extends React.Component{
             return this.setState({
                 status: data.status,
                 items: data.data,
-                admin: data.data.is_admin
+                admin: data.data[0].is_admin
             })
         }).catch((err) => {
             this.setState({
@@ -29,15 +31,16 @@ class PenggunaDashboard extends React.Component{
         })
     }
 
-    render () {    
+    render () {
+        console.log(this.state.admin)    
         const data = this.state.items.map((item, key)=>
-            <table>
+            <table className="table">
                 <tbody>
-                    <tr colSpan="2">
-                        <td><b><center>Selamat Datang {item.nama}</center></b></td>
+                    <tr>
+                        <td colSpan={3}><b><center>Selamat Datang {item.nama}</center></b></td>
                     </tr>
-                    <tr colSpan="2">
-                        <td><center>Berikut akses ownclud anda</center></td>
+                    <tr>
+                        <td colSpan={3}><center>Berikut akses ownclud anda</center></td>
                     </tr>
                     <tr>
                         <td><b>Username</b></td>
@@ -53,6 +56,9 @@ class PenggunaDashboard extends React.Component{
                         <td><b>OwncloudUrl : </b></td>
                         <td>:</td>
                         <td>{item.oc_url}</td>
+                    </tr>
+                    <tr>
+                        <td colSpan={3}><center><LogoutButton /></center></td>
                     </tr>
                 </tbody>
             </table>
