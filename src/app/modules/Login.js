@@ -49,39 +49,43 @@ class Login extends React.Component {
             return <Redirect to="/dashboard" />
         }
         return(
-            <div className="hero-body">
-                <div className="container">
-                <div className="columns is-centered">
-                    <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-                    <form action="" className="box" onSubmit={this.handleSubmit}>
-                        <div className="field">
-                        <label htmlFor="" className="label">Username</label>
-                        <div className="control has-icons-left">
-                            <input type="text" name="user" onChange={this.handleChange} placeholder="Username anda" className="input" required />
-                            <span className="icon is-small is-left">
-                            <i><FontAwesomeIcon icon={faUser} /></i>
-                            </span>
-                        </div>
-                        </div>
-                        <div className="field">
-                        <label htmlFor="" className="label">Password</label>
-                        <div className="control has-icons-left">
-                            <input type="password" name="password" onChange={this.handleChange} placeholder="*******" className="input" required />
-                            <span className="icon is-small is-left">
-                            <FontAwesomeIcon icon={faLock} />
-                            </span>
-                        </div>
-                        </div>
-                        <div className="field">
+            <div>
+                <div>
+                    <h1 className="title">PROVISIONING OWNCLOUD</h1>
+                </div>
+                <br></br>
+                <form action="" className="box" onSubmit={this.handleSubmit}>
+                    <div className="field">
+                    <label htmlFor="" className="label">Username</label>
+                    <div className="control has-icons-left">
+                        <input type="text" name="user" onChange={this.handleChange} placeholder="Username anda" className="input" required />
+                        <span className="icon is-small is-left">
+                        <i><FontAwesomeIcon icon={faUser} /></i>
+                        </span>
+                    </div>
+                    </div>
+                    <div className="field">
+                    <label htmlFor="" className="label">Password</label>
+                    <div className="control has-icons-left">
+                        <input type="password" name="password" onChange={this.handleChange} placeholder="*******" className="input" required />
+                        <span className="icon is-small is-left">
+                        <FontAwesomeIcon icon={faLock} />
+                        </span>
+                    </div>
+                    </div>
+                    <div className="field has-text-centered">
                         <button className="button is-success">
                             Login
                         </button>
-                        </div>
-                    </form>
                     </div>
+                </form>
+                <div className="has-text-centered">
+                    <label className="label">Belum punya akun? silahkan daftar dengan klik <a href="/register">
+                    Daftar            
+                </a>.
+                </label>
                 </div>
-                </div>
-            </div>
+            </div>  
         )
     }
 }

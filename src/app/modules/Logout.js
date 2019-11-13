@@ -18,7 +18,7 @@ class Logout extends React.Component {
             return <Redirect to="/"/>
         } 
         return (
-            <Button color="danger" size="normal" onClick={this.logoutHandler}>Logout</Button>
+            <Button color="danger" size="small" onClick={this.logoutHandler}>Logout</Button>
         )
     }
 }

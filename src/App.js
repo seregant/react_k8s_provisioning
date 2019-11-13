@@ -12,32 +12,39 @@ import {
 import DashboardAdmin from './app/LayoutDashboardAdmin';
 
 class App extends React.Component {
+  componentDidMount(){
+    document.title = "PROVISIONING OWNCLOUD"
+  }
   render() {
     return(
-      <div>
-        <Router>
-          <div>
-            {/* A <Switch> looks through its children <Route>s and
-                renders the first one that matches the current URL. */}
-            <Switch>
-              <Route path="/register">
-                <Register />
-              </Route>
-              <Route path="/dashboard">
-                <DashboardUser />
-              </Route>
-              <Route path="/admin">
-                <DashboardAdmin />
-              </Route>
-              <Route path="/users">
-                <LayoutDataPengguna/>
-              </Route>
-              <Route path="/">
-                <LoginPage />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
+      <div className="hero-body">
+        <div className="container">
+            <div className="columns is-centered">
+                 <div>
+                  <Router>
+                      {/* A <Switch> looks through its children <Route>s and
+                          renders the first one that matches the current URL. */}
+                      <Switch>
+                        <Route path="/register">
+                          <Register />
+                        </Route>
+                        <Route path="/dashboard">
+                          <DashboardUser />
+                        </Route>
+                        <Route path="/admin">
+                          <DashboardAdmin />
+                        </Route>
+                        <Route path="/users">
+                          <LayoutDataPengguna/>
+                        </Route>
+                        <Route path="/">
+                          <LoginPage />
+                        </Route>
+                      </Switch>
+                  </Router>
+                </div>
+            </div>
+        </div>
       </div>
     );
   }
