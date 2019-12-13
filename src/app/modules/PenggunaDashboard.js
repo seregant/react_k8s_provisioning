@@ -48,14 +48,14 @@ class PenggunaDashboard extends React.Component{
                         <td>{item.username}</td>
                     </tr>
                     <tr>
-                        <td><b>Password : </b></td>
+                        <td><b>Password</b></td>
                         <td>:</td>
                         <td>{item.password}</td>
                     </tr>
                     <tr>
-                        <td><b>OwncloudUrl : </b></td>
+                        <td><b>OwncloudUrl</b></td>
                         <td>:</td>
-                        <td>{item.oc_url}</td>
+                        <td><a href={"http://"+item.oc_url} target="_blank">http://{item.oc_url}</a></td>
                     </tr>
                     <tr>
                         <td colSpan={3}><center><LogoutButton /></center></td>
