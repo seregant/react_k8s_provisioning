@@ -74,7 +74,7 @@ class DataNodes extends React.Component {
                                     <td>{timestamp.substr(0,10)}</td>
                                     <td>{capacity.cpu}</td>
                                     <td>{capacity.memory}</td>
-                                    <td className={this.statusColor(condition[5].status)}>{condition[5].status}</td>
+                                    <td className={this.statusColor(condition[4].status)}>{condition[4].reason}</td>
                                 </tr>
                             );
                         }):null
