@@ -9,7 +9,24 @@ class DataNodes extends React.Component {
         
     }
 
-
+    gedata = () => {
+        const AuthStr = 'Bearer '+localStorage.getItem("token"); 
+        axios.get(process.env.REACT_APP_API_URL.concat("clusters/nodes"),
+            { headers: { Authorization: AuthStr },
+         })
+        .then((res)=> res.data)
+        .then((data)=>{
+            console.log(data.status)
+            return this.setState({
+                items: data.data
+            })
+        }).catch((err) => {
+            this.setState({
+                redirect: true
+            })
+        })
+    }
+    
     componentDidMount(){
         this.gedata();
         this.setState({
@@ -27,24 +44,6 @@ class DataNodes extends React.Component {
         } else {
             return "has-text-danger"
         }
-    }
-
-    gedata = () => {
-        const AuthStr = 'Bearer '+localStorage.getItem("token"); 
-        axios.get(process.env.REACT_APP_API_URL.concat("clusters/nodes"),
-            { headers: { Authorization: AuthStr },
-         })
-        .then((res)=> res.data)
-        .then((data)=>{
-            console.log(data.status)
-            return this.setState({
-                items: data.data
-            })
-        }).catch((err) => {
-            this.setState({
-                redirect: true
-            })
-        })
     }
 
     render(){

@@ -1,4 +1,5 @@
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+import LoginButton from './LoginButton'
 import { Redirect } from 'react-router-dom'
 const React = require('react')
 const axios = require('axios')
@@ -19,7 +20,8 @@ class Register extends React.Component {
         redirect: false,
         notifstate: "notification is-info",
         notifshow: false,
-        passnotify: false
+        passnotify: false,
+        loginButton: false,
     };
 
 
@@ -56,11 +58,20 @@ class Register extends React.Component {
             .then(res => {
                 console.log(res.data)
                 return res.data
-            }).then((data) => this.setState(() => ({
-                provStatus: data.validation,
-                message: data.details,
-                notifshow: true
-            })))
+            }).then((data)=> {if (data.details === "Registrasi akun berhasil!") {
+                this.setState(()=>({
+                    message: data.details + " Silahkan Login.",
+                    provStatus: data.validation,
+                    notifshow: true,
+                    loginButton: true
+                }))
+            } else {
+                this.setState(()=>({
+                    message: data.details,
+                    provStatus: data.validation,
+                    notifshow: true
+                }))
+            }})
         } else {
             event.preventDefault();
             this.setState({
@@ -72,9 +83,6 @@ class Register extends React.Component {
     //     console.log(this.state.dataSent)
     // }
     render() {
-        if (this.state.provStatus) {
-            return <Redirect to="/login" />
-        }
         if (this.state.redirect) {
             return <Redirect to="/dashboard" />
         }
@@ -93,71 +101,82 @@ class Register extends React.Component {
                     </div>
                     :null
                 }
-                <form action="" className="box" onSubmit={this.handleSubmit}>
-                    <div className="field">
-                        <label htmlFor="" className="label">Nama :</label>
-                        <div className="control">
-                            <input type="text" name="nama" onChange={this.handleChange} className="input" required />
-                        </div>
+                {
+                    this.state.loginButton ?
+                    <div className={this.state.notifstate}>
+                       <center><LoginButton /></center>
                     </div>
-                    <div className="field">
-                        <label htmlFor="" className="label">Alamat :</label>
-                        <div className="control">
-                            <input type="text" name="alamat" onChange={this.handleChange} className="input" required />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="" className="label">E-mail :</label>
-                        <div className="control">
-                            <input type="text" name="email" onChange={this.handleChange} className="input" required />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="" className="label">Username :</label>
-                        <div className="control">
-                            <input type="text" name="username" onChange={this.handleChange} className="input" required />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="" className="label">Password :</label>
-                        <div className="control">
-                            <input type="password" name="password" onChange={this.handleChange} className="input" required />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="" className="label">Ulangi Password :</label>
-                        <div className="control">
-                            <input type="password" name="password2" onChange={this.handleChange} className="input" required />
-                        </div>
-                    </div>
-                    {
-                        this.state.passnotify ?
+                    :null
+                }
+                {
+                    !this.state.loginButton ?
+                    <form action="" className="box" onSubmit={this.handleSubmit}>
                         <div className="field">
-                            <div className="notification is-danger">
-                                Verifikasi password tidak sama
+                            <label htmlFor="" className="label">Nama :</label>
+                            <div className="control">
+                                <input type="text" name="nama" onChange={this.handleChange} className="input" required />
                             </div>
                         </div>
-                        :null
-                    }
-                    <div className="field">
-                        <label htmlFor="" className="label">Ukuran Penyimpanan :</label>
-                        <div className="control">
-                            <div className="select">
-                                <select className="select" name="storage" onChange={this.handleChange}>
-                                    <option>Pilih ukuran </option>
-                                    <option value="5">5 GB</option>
-                                    <option value="10">10 GB</option>
-                                    <option value="15">15 GB</option>
-                                </select>
+                        <div className="field">
+                            <label htmlFor="" className="label">Alamat :</label>
+                            <div className="control">
+                                <input type="text" name="alamat" onChange={this.handleChange} className="input" required />
                             </div>
                         </div>
-                    </div>
-                    <div className="field has-text-centered">
-                        <button className="button is-success">
-                            Register
-                        </button>
-                    </div>
-                </form>
+                        <div className="field">
+                            <label htmlFor="" className="label">E-mail :</label>
+                            <div className="control">
+                                <input type="text" name="email" onChange={this.handleChange} className="input" required />
+                            </div>
+                        </div>
+                        <div className="field">
+                            <label htmlFor="" className="label">Username :</label>
+                            <div className="control">
+                                <input type="text" name="username" onChange={this.handleChange} className="input" required />
+                            </div>
+                        </div>
+                        <div className="field">
+                            <label htmlFor="" className="label">Password :</label>
+                            <div className="control">
+                                <input type="password" name="password" onChange={this.handleChange} className="input" required />
+                            </div>
+                        </div>
+                        <div className="field">
+                            <label htmlFor="" className="label">Ulangi Password :</label>
+                            <div className="control">
+                                <input type="password" name="password2" onChange={this.handleChange} className="input" required />
+                            </div>
+                        </div>
+                        {
+                            this.state.passnotify ?
+                            <div className="field">
+                                <div className="notification is-danger">
+                                    Verifikasi password tidak sama
+                                </div>
+                            </div>
+                            :null
+                        }
+                        <div className="field">
+                            <label htmlFor="" className="label">Ukuran Penyimpanan :</label>
+                            <div className="control">
+                                <div className="select">
+                                    <select className="select" name="storage" onChange={this.handleChange}>
+                                        <option>Pilih ukuran </option>
+                                        <option value="5">5 GB</option>
+                                        <option value="10">10 GB</option>
+                                        <option value="15">15 GB</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="field has-text-centered">
+                            <button className="button is-success">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                    :null
+                }
             </div>
         )
     }
